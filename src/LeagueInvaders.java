@@ -6,6 +6,7 @@ public class LeagueInvaders {
 	final int height = 800;
 	GamePanel gpanel;
 
+	// constructor
 	public LeagueInvaders() {
 		frameA = new JFrame();
 		gpanel = new GamePanel();

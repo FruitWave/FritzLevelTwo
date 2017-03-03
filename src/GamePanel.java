@@ -9,17 +9,51 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
+	final int MENU_STATE = 0;
+	final int GAME_STATE = 1;
+	final int END_STATE = 2;
+	int currentState = MENU_STATE;
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
+
 	}
 
-	public static void main(String[] args) {
+	void updateMenuState() {
+
+	}
+
+	void updateGameState() {
+
+	}
+
+	void updateEndState() {
+
+	}
+
+	void drawMenuState(Graphics readyPlayerOne) {
+		readyPlayerOne.setColor(Color.BLUE);
+		readyPlayerOne.fillRect(0, 0, 500, 800); 
+	}
+
+	void drawGameState(Graphics massatar) {
+
+	}
+
+	void drawEndState(Graphics apocalypse) {
 
 	}
 
 	public void paintComponent(Graphics g) {
-		g.fillRect(10, 10, 100, 100);
+
+		if (currentState == MENU_STATE) {
+			drawMenuState(g);
+		} else if (currentState == GAME_STATE) {
+			drawGameState(g);
+		} else if (currentState == END_STATE) {
+			drawEndState(g);
+		}
+
 	}
 
 	void startGame() {
@@ -29,18 +63,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
+		if (currentState == MENU_STATE) {
+			updateMenuState();
+		} else if (currentState == GAME_STATE) {
+			updateGameState();
+		} else if (currentState == END_STATE) {
+			updateEndState();
+		}
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-System.out.println("keyTyped");
+		System.out.println("keyTyped");
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-System.out.println("keyPressed");
+		System.out.println("keyPressed");
 	}
 
 	@Override
