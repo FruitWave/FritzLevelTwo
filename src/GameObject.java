@@ -7,14 +7,12 @@ public class GameObject {
 	int heightGO;
 
 	void update() {
-		x = 100;
-		y = 10;
+	
 		
 	}
 
 	void draw(Graphics vector) {
-		System.out.println(x + "." + y);
-		vector.fillRect(x, y, 100, 100);
+	
 
 	}
 }

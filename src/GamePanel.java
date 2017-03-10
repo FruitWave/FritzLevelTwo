@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +15,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	Font font;
+	Font funFont;
+	static int casualtyCount;
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
-
+		font = new Font("Arial", Font.PLAIN, 48);
+		funFont = new Font("Comic Sans MS", Font.CENTER_BASELINE, 30);
+		casualtyCount = 0;
 	}
 
 	void updateMenuState() {
@@ -33,15 +40,34 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics readyPlayerOne) {
 		readyPlayerOne.setColor(Color.BLUE);
-		readyPlayerOne.fillRect(0, 0, 500, 800); 
+		readyPlayerOne.setFont(font);
+		readyPlayerOne.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		readyPlayerOne.setColor(Color.WHITE);
+		readyPlayerOne.drawString("READY PLAYER ONE", 5, 250);
+		readyPlayerOne.setColor(Color.CYAN);
+		readyPlayerOne.drawString("press enter to play", 48, 350);
+		readyPlayerOne.setFont(funFont);
+		readyPlayerOne.setColor(Color.MAGENTA);
+		readyPlayerOne.drawString("press space for instructions", 48, 450);
+
 	}
 
 	void drawGameState(Graphics massatar) {
-
+		massatar.setColor(Color.BLACK);
+		massatar.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
 	}
 
 	void drawEndState(Graphics apocalypse) {
-
+		apocalypse.setColor(Color.RED);
+		apocalypse.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		apocalypse.setFont(font);
+		apocalypse.setColor(Color.WHITE);
+		apocalypse.drawString("GAME OVER", 90, 250);
+		apocalypse.setColor(Color.BLACK);
+		apocalypse.drawString("You killed " + casualtyCount + " aliens.", 60, 350);
+		apocalypse.setFont(funFont);
+		apocalypse.setColor(Color.WHITE);
+		apocalypse.drawString("press delete to restart", 75, 450);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -83,6 +109,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("keyPressed");
+		if (e.getKeyCode() == 10) {
+			if (currentState == MENU_STATE) {
+				currentState = GAME_STATE;
+			} else if (currentState == GAME_STATE) {
+				currentState = END_STATE;
+			} else if (currentState >= END_STATE) {
+				currentState = MENU_STATE;
+			}
+		}
+		if (e.getKeyCode() == 8) {
+			if (currentState >= END_STATE) {
+				currentState = MENU_STATE;
+			}
+		}
 	}
 
 	@Override
