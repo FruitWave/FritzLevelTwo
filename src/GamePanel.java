@@ -18,12 +18,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font font;
 	Font funFont;
 	static int casualtyCount;
+	TARDIS tardis = new TARDIS(250, 700, 50, 50);
+	ObjectManager control = new ObjectManager();
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		font = new Font("Arial", Font.PLAIN, 48);
 		funFont = new Font("Comic Sans MS", Font.CENTER_BASELINE, 30);
 		casualtyCount = 0;
+		control.addObject(tardis);
 	}
 
 	void updateMenuState() {
@@ -31,7 +34,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-
+		control.update();
 	}
 
 	void updateEndState() {
@@ -55,6 +58,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics massatar) {
 		massatar.setColor(Color.BLACK);
 		massatar.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		tardis.draw(massatar);
 	}
 
 	void drawEndState(Graphics apocalypse) {
@@ -123,12 +127,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				currentState = MENU_STATE;
 			}
 		}
+		// System.out.println(e.getKeyCode());
+		if (e.getKeyCode() == 38) {
+			tardis.warpfactorY = -5;
+		} else if (e.getKeyCode() == 37) {
+			tardis.warpfactorX = -5;
+		} else if (e.getKeyCode() == 40) {
+			tardis.warpfactorY = 5;
+		} else if (e.getKeyCode() == 39) {
+			tardis.warpfactorX = 5;
+		}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("keyReleased");
+		tardis.warpfactorX = 0;
+		tardis.warpfactorY = 0;
 
 	}
 

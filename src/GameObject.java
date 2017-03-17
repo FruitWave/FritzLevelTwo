@@ -5,14 +5,13 @@ public class GameObject {
 	int y;
 	int widthGO;
 	int heightGO;
+	boolean isAlive = true;
 
 	void update() {
-	
-		
+
 	}
 
 	void draw(Graphics vector) {
-	
 
 	}
 }
