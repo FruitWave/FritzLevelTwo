@@ -16,6 +16,7 @@ public class TARDIS extends GameObject {
 		width = widthvar;
 		height = heightvar;
 		warpfactorX = 5;
+		warpfactorY = 5;
 	}
 
 	void update() {

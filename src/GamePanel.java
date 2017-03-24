@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics massatar) {
 		massatar.setColor(Color.BLACK);
 		massatar.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
-		tardis.draw(massatar);
+		control.draw(massatar);
 	}
 
 	void drawEndState(Graphics apocalypse) {
@@ -137,7 +137,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (e.getKeyCode() == 39) {
 			tardis.warpfactorX = 5;
 		}
-
+		if (e.getKeyChar() == KeyEvent.VK_SPACE) {
+			System.out.println("the key code is '" + e.getKeyChar() + "'");
+			control.addObject(new Projectile(tardis.x + 20, tardis.y, 10, 10));
+		}
 	}
 
 	@Override
