@@ -1,11 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Projectile extends GameObject{
-	private int x;
-	private int y;
-	private int width;
-	private int height;
+public class Projectile extends GameObject {
+	
 	private int speed = 10;
 
 	/**
@@ -21,6 +18,7 @@ public class Projectile extends GameObject{
 	 */
 	public Projectile(int px /* p = position */, int py,
 			int bx /* b = body (width in this case) */, int by) {
+		super();
 		x = px;
 		y = py;
 		width = bx;
@@ -28,6 +26,7 @@ public class Projectile extends GameObject{
 	}
 
 	void update() {
+		super.update();
 		y -= speed;
 		if (y < 0) {
 			isAlive = false;

@@ -9,7 +9,7 @@ public class ObjectManager {
 	private int score = 0;
 
 	long enemyTimer = 0;
-	int enemySpawnTime = 1000;
+	int enemySpawnTime = 1;
 
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
@@ -43,38 +43,38 @@ public class ObjectManager {
 		}
 	}
 
-	// public void manageEnemies(){
-	// if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-	// addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50,
-	// 50));
-	// enemyTimer = System.currentTimeMillis();
-	// }
-	// }
-	//
-	// public void checkCollision() {
-	// for (int i = 0; i < objects.size(); i++) {
-	// for (int j = i + 1; j < objects.size(); j++) {
-	// GameObject o1 = objects.get(i);
-	// GameObject o2 = objects.get(j);
-	//
-	// if(o1.collisionBox.intersects(o2.collisionBox)){
-	// if((o1 instanceof Alien && o2 instanceof Projectile) ||
-	// (o2 instanceof Alien && o1 instanceof Projectile)){
-	// score++;
-	// System.out.println(score);
-	// o1.isAlive = false;
-	// o2.isAlive = false;
-	// }
-	// else if((o1 instanceof Alien && o2 instanceof Rocketship) ||
-	// (o2 instanceof Alien && o1 instanceof Rocketship)){
-	// o1.isAlive = false;
-	// o2.isAlive = false;
-	// }
-	//
-	// }
-	// }
-	// }
-	// }
+	public void manageEnemies() {
+		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+			addObject(new Alien(new Random().nextInt(LeagueInvaders.width), 0, 50, 50));
+			enemyTimer = System.currentTimeMillis();
+		}
+	}
+
+	public void checkCollision() {
+		for (int i = 0; i < objects.size(); i++) {
+			for (int j = i + 1; j < objects.size(); j++) {
+				GameObject o1 = objects.get(i);
+				GameObject o2 = objects.get(j);
+
+				if (o1.collisionBox.intersects(o2.collisionBox)) {
+					
+					if ((o1 instanceof Alien && o2 instanceof Projectile)
+							|| (o2 instanceof Alien && o1 instanceof Projectile)) {
+						System.out.println("true");
+						score++;
+						System.out.println(score);
+						o1.isAlive = false;
+						o2.isAlive = false;
+					} else if ((o1 instanceof Alien && o2 instanceof TARDIS)
+							|| (o2 instanceof Alien && o1 instanceof TARDIS)) {
+						o1.isAlive = false;
+						o2.isAlive = false;
+					}
+
+				}
+			}
+		}
+	}
 
 	public int getScore() {
 		return score;

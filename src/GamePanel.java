@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	ObjectManager control = new ObjectManager();
 
 	public GamePanel() {
-		timer = new Timer(1000 / 60, this);
+		timer = new Timer(1000 / 120, this);
 		font = new Font("Arial", Font.PLAIN, 48);
 		funFont = new Font("Comic Sans MS", Font.CENTER_BASELINE, 30);
 		casualtyCount = 0;
@@ -35,6 +35,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		control.update();
+		control.manageEnemies();
+		control.checkCollision();
+		
 	}
 
 	void updateEndState() {

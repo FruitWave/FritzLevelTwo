@@ -2,15 +2,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class TARDIS extends GameObject {
-	int x;
-	int y;
-	int width;
-	int height;
+//	int x;
+//	int y;
+//	int width;
+//	int height;
 	int warpfactorX;
 	int warpfactorY;
 	int noninitializedRealityWarpFactors;
 
 	public TARDIS(int xvar, int yvar, int widthvar, int heightvar) {
+		super();
 		x = xvar;
 		y = yvar;
 		width = widthvar;
@@ -20,6 +21,7 @@ public class TARDIS extends GameObject {
 	}
 
 	void update() {
+		super.update();
 		x += warpfactorX;
 		y += warpfactorY;
 	}
