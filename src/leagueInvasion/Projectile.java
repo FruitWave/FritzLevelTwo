@@ -1,3 +1,4 @@
+package leagueInvasion;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -34,7 +35,7 @@ public class Projectile extends GameObject {
 	}
 
 	void draw(Graphics arrow) {
-		arrow.setColor(Color.red);
-		arrow.fillRect(x, y, width, height);
+		arrow.drawImage(GamePanel.bulletImg, x, y, width, height, null);
+
 	}
 }

@@ -1,3 +1,4 @@
+package leagueInvasion;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class ObjectManager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addObject(new Alien(new Random().nextInt(LeagueInvaders.width), 0, 50, 50));
+			addObject(new Alien(new Random().nextInt(LeagueInvaders.width), 0, 200, 200));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}

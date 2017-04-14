@@ -1,3 +1,4 @@
+package leagueInvasion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -5,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,6 +24,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	static int casualtyCount;
 	TARDIS tardis = new TARDIS(250, 700, 50, 50);
 	ObjectManager control = new ObjectManager();
+	public static BufferedImage alienImg;
+	public static BufferedImage rocketImg;
+	public static BufferedImage bulletImg;
 
 	public GamePanel() {
 		timer = new Timer(1000 / 120, this);
@@ -27,6 +34,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		funFont = new Font("Comic Sans MS", Font.CENTER_BASELINE, 30);
 		casualtyCount = 0;
 		control.addObject(tardis);
+		try {
+			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	void updateMenuState() {
@@ -37,11 +52,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		control.update();
 		control.manageEnemies();
 		control.checkCollision();
-		
+		if (tardis.isAlive == false) {
+			currentState = END_STATE;
+			casualtyCount = control.getScore();
+			control.reset();
+			tardis = new TARDIS(250, 700, 50, 50);
+			control.addObject(tardis);
+		}
+
 	}
 
 	void updateEndState() {
-
 	}
 
 	void drawMenuState(Graphics readyPlayerOne) {
@@ -127,6 +148,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == 8) {
 			if (currentState >= END_STATE) {
+				control.setScore(0);
 				currentState = MENU_STATE;
 			}
 		}
@@ -142,7 +164,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyChar() == KeyEvent.VK_SPACE) {
 			System.out.println("the key code is '" + e.getKeyChar() + "'");
-			control.addObject(new Projectile(tardis.x + 20, tardis.y, 10, 10));
+			control.addObject(new Projectile(tardis.x + 20, tardis.y, 100, 100));
 		}
 	}
 

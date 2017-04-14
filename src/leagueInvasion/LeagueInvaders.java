@@ -1,3 +1,4 @@
+package leagueInvasion;
 import javax.swing.JFrame;
 
 public class LeagueInvaders {

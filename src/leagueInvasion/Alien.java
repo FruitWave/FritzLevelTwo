@@ -1,3 +1,4 @@
+package leagueInvasion;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -17,7 +18,7 @@ this.height=height;
 	}
 
 	void draw(Graphics littleBlueBox) {
-		littleBlueBox.setColor(Color.yellow);
-		littleBlueBox.drawRect(x, y, width, height);
+		littleBlueBox.drawImage(GamePanel.alienImg, x, y, width, height, null);
+
 	}
 }

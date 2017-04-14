@@ -1,3 +1,4 @@
+package leagueInvasion;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -27,8 +28,8 @@ public class TARDIS extends GameObject {
 	}
 
 	void draw(Graphics batman) {
-		batman.setColor(Color.BLUE);
-		batman.fillRect(x, y, width, height);
+		batman.drawImage(GamePanel.rocketImg, x, y, width, height, null);
+
 
 	}
 
