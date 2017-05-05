@@ -3,7 +3,8 @@ package Pioneer;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Tank1 extends ObjectConstructor {
+
+public class Tank1 extends GameObject {
 	
 	public Tank1(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -12,7 +13,7 @@ public class Tank1 extends ObjectConstructor {
 		
 	}
 	void draw(Graphics tankA){
-		tankA.setColor(Color.magenta);
+		tankA.setColor(Color.BLACK);
 		tankA.fillRect(x, y, width, height);
 	}
 }
