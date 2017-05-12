@@ -92,18 +92,35 @@ public class Sketcher extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			if (tanka.movefactorY == -1 || tanka.movefactorY == 1) {
+				tanka.movefactorY = 0;
+				tanka.movefactorX = 0;
+			}
 			tanka.movefactorY -= 5;
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			if (tanka.movefactorX == -1 || tanka.movefactorX == 1) {
+				tanka.movefactorX = 0;
+				tanka.movefactorY = 0;
+			}
 			tanka.movefactorX -= 5;
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			if (tanka.movefactorX == -1 || tanka.movefactorX == 1) {
+				tanka.movefactorX = 0;
+				tanka.movefactorY = 0;
+			}
 			tanka.movefactorX += 5;
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			if (tanka.movefactorY == -1 || tanka.movefactorY == 1) {
+				tanka.movefactorY = 0;
+				tanka.movefactorX = 0;
+			}
 			tanka.movefactorY += 5;
-			// tanka.movefactorY = 5; for "absolute" speeds, not
-			// additives/subtractitives
+			// tanka.movefactorY += 5; , for additives/subtractitives
+			// not "absolute" speeds
 		} else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 			System.out.println("pew pew");
 		}
+		// int momentum = (tanka.movefactorX + tanka.movefactorY)/2;
 
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == MENU_STATE) {
@@ -122,14 +139,28 @@ public class Sketcher extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		System.out.println("released");
 		if (tanka.movefactorX < 0) {
-			tanka.movefactorX = 1;
+			for (int i = tanka.movefactorX; i != 0; i++) {
+				tanka.movefactorX += 1;
+				System.out.println("x stop down");
+			}
+			tanka.movefactorX = -1;/* MAKES IT NEVER STOP left */
 		} else if (tanka.movefactorX > 0) {
-			tanka.movefactorX -= 1;
+			for (int i = tanka.movefactorX; i != 0; i--) {
+				tanka.movefactorX -= 1;
+				System.out.println("x stop up");
+			}
+			tanka.movefactorX = 1;/* MAKES IT NEVER STOP right */
 		}
 		if (tanka.movefactorY < 0) {
-			tanka.movefactorY = 1;
+			for (int i = tanka.movefactorY; i != 0; i++) {
+				tanka.movefactorY += 1;
+			}
+			tanka.movefactorY = -1;/* MAKES IT NEVER STOP down */
 		} else if (tanka.movefactorY > 0) {
-			tanka.movefactorY -= 1;
+			for (int i = tanka.movefactorY; i != 0; i--) {
+				tanka.movefactorY -= 1;
+			}
+			tanka.movefactorY = 1;/* MAKES IT NEVER STOP up */
 		}
 	}
 }
