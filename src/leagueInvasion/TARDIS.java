@@ -9,8 +9,7 @@ public class TARDIS extends GameObject {
 //	int height;
 	int warpfactorX;
 	int warpfactorY;
-	int noninitializedRealityWarpFactors;
-
+	
 	public TARDIS(int xvar, int yvar, int widthvar, int heightvar) {
 		super();
 		x = xvar;

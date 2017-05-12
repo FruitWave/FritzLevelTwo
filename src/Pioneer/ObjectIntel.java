@@ -12,7 +12,7 @@ public class ObjectIntel {
 	long enemyTimer = 0;
 	int enemySpawnTime = 1;
 
-	public ObjectManager() {
+	public ObjectIntel() {
 		objects = new ArrayList<GameObject>();
 	}
 
@@ -44,12 +44,12 @@ public class ObjectIntel {
 		}
 	}
 
-	public void manageEnemies() {
-		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addObject(new Alien(new Random().nextInt(Runner.width), 0, 200, 200));
-			enemyTimer = System.currentTimeMillis();
-		}
-	}
+	// public void manageEnemies() {
+	// if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+	// addObject(new Hydra(new Random().nextInt(Runner.width), 0, 200, 200));
+	// enemyTimer = System.currentTimeMillis();
+	// }
+	// }
 
 	public void checkCollision() {
 		for (int i = 0; i < objects.size(); i++) {
@@ -58,16 +58,18 @@ public class ObjectIntel {
 				GameObject o2 = objects.get(j);
 
 				if (o1.collisionBox.intersects(o2.collisionBox)) {
-					
-					if ((o1 instanceof Alien && o2 instanceof Projectile)
-							|| (o2 instanceof Alien && o1 instanceof Projectile)) {
+
+					if ((o1 instanceof Tank1 && o2 instanceof ProjectileA)
+							|| (o2 instanceof Tank1 && o1 instanceof ProjectileA)
+							|| (o1 instanceof Tank2 && o2 instanceof ProjectileA)
+							|| (o2 instanceof Tank2 && o1 instanceof ProjectileA)) {
 						System.out.println("true");
 						score++;
 						System.out.println(score);
 						o1.mortality = false;
 						o2.mortality = false;
-					} else if ((o1 instanceof Alien && o2 instanceof Tank1)
-							|| (o2 instanceof Alien && o1 instanceof Tank1)) {
+					} else if ((o1 instanceof Hydra && o2 instanceof Tank1)
+							|| (o2 instanceof Hydra && o1 instanceof Tank1)) {
 						o1.mortality = false;
 						o2.mortality = false;
 					}

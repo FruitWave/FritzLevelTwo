@@ -33,6 +33,7 @@ public class Sketcher extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		tanka.update();
+
 	}
 
 	void updateEndState() {
@@ -45,7 +46,7 @@ public class Sketcher extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawGameState(Graphics b) {
-		
+
 		b.setColor(Color.GREEN);
 		b.fillRect(0, 0, 1000, 1000);
 		tanka.draw(b);
@@ -90,19 +91,21 @@ public class Sketcher extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		if (e.getKeyChar() == KeyEvent.VK_UP) {
-
-		} else if (e.getKeyChar() == KeyEvent.VK_LEFT) {
-
-		} else if (e.getKeyChar() == KeyEvent.VK_RIGHT) {
-
-		} else if (e.getKeyChar() == KeyEvent.VK_DOWN) {
-
-		} else if (e.getKeyChar() == KeyEvent.VK_SHIFT) {
-
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			tanka.movefactorY -= 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			tanka.movefactorX -= 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			tanka.movefactorX += 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			tanka.movefactorY += 5;
+			// tanka.movefactorY = 5; for "absolute" speeds, not
+			// additives/subtractitives
+		} else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+			System.out.println("pew pew");
 		}
 
-		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == MENU_STATE) {
 				currentState = GAME_STATE;
 			} else if (currentState == GAME_STATE) {
@@ -118,6 +121,15 @@ public class Sketcher extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("released");
-
+		if (tanka.movefactorX < 0) {
+			tanka.movefactorX = 1;
+		} else if (tanka.movefactorX > 0) {
+			tanka.movefactorX -= 1;
+		}
+		if (tanka.movefactorY < 0) {
+			tanka.movefactorY = 1;
+		} else if (tanka.movefactorY > 0) {
+			tanka.movefactorY -= 1;
+		}
 	}
 }

@@ -10,6 +10,7 @@ public class GameObject {
 	int width;
 	int height;
 	boolean mortality = true;
+	
 	Rectangle collisionBox = new Rectangle(x, y, width, height);
 
 	public GameObject(int x, int y, int width, int height) {
@@ -17,10 +18,11 @@ public class GameObject {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
 	}
 
 	void update() {
-
+		collisionBox.setBounds(x, y, width, height);
 	}
 
 	void draw(Graphics graphic) {
