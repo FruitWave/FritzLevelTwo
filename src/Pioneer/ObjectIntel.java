@@ -7,8 +7,8 @@ import java.util.Random;
 public class ObjectIntel {
 	ArrayList<GameObject> objects;
 
-	private int score = 0;
-
+	//previously score was initialized here, privately, to 0
+	
 	long enemyTimer = 0;
 	int enemySpawnTime = 1;
 
